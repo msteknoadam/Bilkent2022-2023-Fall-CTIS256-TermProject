@@ -45,6 +45,19 @@ $(function () {
                                 <td>${p.required_hardware}</td>
                                 <td>${p.members}</td>
                                 ${
+									$("#isAdmin").length != 0
+										? `
+                                    <td>
+                                        <form action="editProject.php" method="post">
+                                            <input type="text" name="project_id" style="display: none;" value="${p.id}">
+                                            <input class="btn" type="submit" name="acceptBtn" value="✅"></input>
+                                            <input class="btn" type="submit" name="rejectBtn" value="❌"></input>
+                                        </form>
+                                    </td>
+                                    `
+										: ""
+								}
+                                ${
 									$("#canEdit").length != 0
 										? `
                                     <td><a href="editProject.php?project_id=${p.id}">Edit</a> | <a href="deleteProject.php?project_id=${p.id}">Delete</a></td>

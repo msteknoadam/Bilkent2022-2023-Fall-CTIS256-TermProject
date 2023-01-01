@@ -45,7 +45,7 @@ $canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "
                 <th>Required Hardware</th>
                 <th>Group Members</th>
                 <?php if ($isAdmin): ?>
-                <th>Accept/Reject</th>
+                <th id="isAdmin>Accept/Reject</th>
                 <?php endif;?>
                 <?php if ($canEdit): ?>
                 <th id="canEdit">Edit/Delete</th>
