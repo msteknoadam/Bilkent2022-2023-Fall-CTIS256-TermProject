@@ -16,10 +16,11 @@ if (isset($_POST["update"])) {
     } else {
         $stmt = $db->prepare("update users set email=?,username=?,password=?,name=? where id=?");
         $result = $stmt->execute([$email, $username, $password, $name, $user["id"]]);
-        $user_stmt = $db->prepare("select * from users where id=?");
-        $user_stmt->execute([$user["id"]]);
-        $user = $user_stmt->fetch();
     }
+
+    $user_stmt = $db->prepare("select * from users where id=?");
+    $user_stmt->execute([$user["id"]]);
+    $user = $user_stmt->fetch();
 }
 
 ?>
