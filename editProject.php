@@ -30,6 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $stmt->execute([$newState, $project_id]);
         }
     }
-}
 
-header("Location: " . $_SERVER['HTTP_REFERER']);
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+}
