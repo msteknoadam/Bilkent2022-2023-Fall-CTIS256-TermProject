@@ -32,8 +32,9 @@ if (isset($_POST["logout"])) {
     <h1><a href="profile.php">Profile</a></h1>
     <h1><a href="createProject.php">Create Project</a></h1>
     <h1><a href="manageProjects.php">Manage Projects</a></h1>
+    <br>
     <form action="" method="post">
-        <input type="submit" value="Logout" name="logout">
+        <center><input class="btn red" type="submit" value="Logout" name="logout"></center>
     </form>
     <?php else: ?>
     <h1><a href="login.php">Login</a></h1>
