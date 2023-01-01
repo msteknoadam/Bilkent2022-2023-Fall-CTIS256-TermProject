@@ -8,11 +8,8 @@ if (isset($_POST["logout"])) {
     setcookie(session_name(), "", 1, "/");
 }
 
-if (isset($_SESSION["user"]) && isset($_SESSION["user"]["id"])) {
-    $user_stmt = $db->prepare("select * from users where id = ?");
-    $user_stmt->execute([$_SESSION["user"]["id"]]);
-    $user = $user_stmt->fetch();
-}
+include_once "util/setLoggedInUser.php";
+
 ?>
 
 <!DOCTYPE html>
