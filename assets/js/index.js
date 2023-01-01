@@ -44,6 +44,13 @@ $(function () {
                                 <td>${p.required_software}</td>
                                 <td>${p.required_hardware}</td>
                                 <td>${p.members}</td>
+                                ${
+									$("#canEdit").length != 0
+										? `
+                                    <td><a href="editProject.php?project_id=${p.id}">Edit</a> | <a href="deleteProject.php?project_id=${p.id}">Delete</a></td>
+                                    `
+										: ""
+								}
                             `;
 							projectsEl.appendChild(tr);
 						});

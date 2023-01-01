@@ -41,14 +41,14 @@ $canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "
                 <th>Project Semester</th>
                 <th>Project Requirements</th>
                 <th>Project State</th>
-                <th>Required Softwares</th>
+                <th>Required Software</th>
                 <th>Required Hardware</th>
                 <th>Group Members</th>
                 <?php if ($isAdmin): ?>
                 <th>Accept/Reject</th>
                 <?php endif;?>
                 <?php if ($canEdit): ?>
-                <th>Edit/Delete</th>
+                <th id="canEdit">Edit/Delete</th>
                 <?php endif;?>
             </thead>
             <tbody id="projects">
