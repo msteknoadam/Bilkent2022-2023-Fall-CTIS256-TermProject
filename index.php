@@ -1,14 +1,13 @@
 <?php
 include_once "db.php";
-session_start();
+include_once "session.php";
 
 if (isset($_POST["logout"])) {
+    unset($user);
     $_SESSION = [];
     session_abort();
     setcookie(session_name(), "", 1, "/");
 }
-
-include_once "util/setLoggedInUser.php";
 
 ?>
 

@@ -2,9 +2,7 @@
 
 include_once "db.php";
 
-if (session_status() != 2) {
-    session_start();
-}
+session_start();
 
 if (isset($_SESSION["user"]) && isset($_SESSION["user"]["id"])) {
     $user_stmt = $db->prepare("select * from users where id = ?");
