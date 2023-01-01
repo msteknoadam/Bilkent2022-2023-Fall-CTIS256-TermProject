@@ -35,12 +35,6 @@ if (isset($_POST["logout"])) {
     <h1><a href="register.php">Register</a></h1>
     <?php endif;?>
 
-    <?php
-if (isset($user)) {
-    var_dump($user);
-}
-?>
-
 <?php
 if (!isset($user)) {
     include "viewProjects.php";
