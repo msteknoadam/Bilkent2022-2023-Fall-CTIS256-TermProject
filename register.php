@@ -93,30 +93,30 @@ if (isset($submit)) {
                     <?=in_array("username_taken", $errors) ? "<h2 style='color:red'>This username is already taken.</h2>" : ""?>
                     <form action="" method="post">
                         <p>Email: <?=in_array("email_error", $errors) ? "Please enter your email !!" : ""?></p>
-                        <input type="email" name="email" placeholder="Enter your email">
+                        <input type="email" name="email" placeholder="Enter your email" value="<?=$email ?? ""?>">
                         <p>Username: <?=in_array("username_error", $errors) ? "Please enter your username !!" : ""?></p>
-                        <input type="text" name="username" placeholder="Enter your username">
+                        <input type="text" name="username" placeholder="Enter your username" value="<?=$username ?? ""?>">
                         <p>Password: <?=in_array("password_error", $errors) ? "Please enter your password !!" : ""?> </p>
-                        <input type="password" name="password">
+                        <input type="password" name="password" value="<?=$password ?? ""?>">
                         <p>Account Type: <?=in_array("userclass_error", $errors) ? "Please select your account type !!" : ""?></p>
                         <select name="userclass" id="typeSelector">
-                            <option value="firm" id="firmOption">Firm User</option>
-                            <option value="instructor">Instructor User/Project Advisor User</option>
-                            <option value="student">Student User</option>
+                            <option value="firm" id="firmOption" <?=isset($userclass) && $userclass == "firm" ? "selected" : ""?>>Firm User</option>
+                            <option value="instructor" <?=isset($userclass) && $userclass == "instructor" ? "selected" : ""?>>Instructor User/Project Advisor User</option>
+                            <option value="student" <?=isset($userclass) && $userclass == "student" ? "selected" : ""?>>Student User</option>
                         </select>
                         <div id="firmInputs">
                             <p>Firm Name: <?=in_array("firmname_error", $errors) ? "Please enter your firm's name !!" : ""?> </p>
-                            <input type="text" name="firmname">
+                            <input type="text" name="firmname" value="<?=$firmname ?? ""?>">
                             <p>City: <?=in_array("city_error", $errors) ? "Please enter your firm's city !!" : ""?> </p>
-                            <input type="text" name="city">
+                            <input type="text" name="city" value="<?=$city ?? ""?>">
                             <p>District: <?=in_array("district_error", $errors) ? "Please enter your firm's district !!" : ""?> </p>
-                            <input type="text" name="district">
+                            <input type="text" name="district" value="<?=$district ?? ""?>">
                             <p>Address: <?=in_array("address_error", $errors) ? "Please enter your firm's address !!" : ""?> </p>
-                            <input type="text" name="address">
+                            <input type="text" name="address" value="<?=$address ?? ""?>">
                         </div>
                         <div id="nameInput">
                             <p>Name: <?=in_array("name_error", $errors) ? "Please enter your name !!" : ""?> </p>
-                            <input type="text" name="name">
+                            <input type="text" name="name" value="<?=$name ?? ""?>">
                         </div>
                         <input class="inp" type="submit" name="submit">
                     </form>
