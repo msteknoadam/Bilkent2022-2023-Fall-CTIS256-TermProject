@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jan 01, 2023 at 11:15 AM
+-- Generation Time: Jan 01, 2023 at 11:41 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,6 +19,24 @@ CREATE DATABASE IF NOT EXISTS `ctis256` DEFAULT CHARACTER
 SET utf8 COLLATE utf8_general_ci;
 
 USE `ctis256`;
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `projects`
+--
+DROP TABLE IF EXISTS `projects`;
+
+CREATE TABLE `projects` (
+    `id` int(11) NOT NULL,
+    `name` text NOT NULL,
+    `description` text NOT NULL,
+    `year` text NOT NULL,
+    `semester` text NOT NULL,
+    `requirements` text NOT NULL,
+    `state` text NOT NULL,
+    `required_software` text NOT NULL,
+    `required_hardware` text NOT NULL,
+    `members` text NOT NULL) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- --------------------------------------------------------
 --
@@ -48,6 +66,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `userclass`, `name`,
 -- Indexes for dumped tables
 --
 --
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -56,6 +80,11 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --

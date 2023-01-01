@@ -9,6 +9,12 @@ if (isset($_POST["logout"])) {
     setcookie(session_name(), "", 1, "/");
 }
 
+if (!isset($user)) {
+    $projects_stmt = $db->prepare("select * from projects order by year desc");
+    $projects_stmt->execute();
+    $projects = $projects_stmt->fetchAll();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +29,7 @@ if (isset($_POST["logout"])) {
     <h1><a href="login.php">Login</a></h1>
     <h1><a href="register.php">Register</a></h1>
 
-   <?php if (isset($user)): ?>
+    <?php if (isset($user)): ?>
     <h1><a href="profile.php">Profile</a></h1>
     <form action="" method="post">
         <input type="submit" value="Logout" name="logout">
@@ -35,5 +41,40 @@ if (isset($user)) {
     var_dump($user);
 }
 ?>
+
+    <?php if (isset($projects)): ?>
+        <?php if (sizeof($projects) > 0): ?>
+        <table>
+            <thead>
+                <th>Project Name</th>
+                <th>Project Description</th>
+                <th>Project Year</th>
+                <th>Project Semester</th>
+                <th>Project Requirements</th>
+                <th>Project State</th>
+                <th>Required Softwares</th>
+                <th>Required Hardware</th>
+                <th>Group Members</th>
+            </thead>
+            <tbody>
+            <?php foreach ($projects as $project): ?>
+                <tr>
+                    <td><?=$project["name"]?></td>
+                    <td><?=$project["description"]?></td>
+                    <td><?=$project["year"]?></td>
+                    <td><?=$project["semester"]?></td>
+                    <td><?=$project["requirements"]?></td>
+                    <td><?=$project["state"]?></td>
+                    <td><?=$project["required_software"]?></td>
+                    <td><?=$project["required_hardware"]?></td>
+                    <td><?=$project["members"]?></td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
+        <?php else: ?>
+        <h1>No Projects Added Yet!</h1>
+        <?php endif;?>
+    <?php endif;?>
 </body>
 </html>
