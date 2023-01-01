@@ -28,7 +28,7 @@ $canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "
                     <td><input type="text" name="project_year"></td>
                     <td><input type="text" name="project_semester"></td>
                     <td><input type="text" name="group_member_name"></td>
-                    <td><button id="search_project_btn">Search</button></td>
+                    <td><button class="btn" id="search_project_btn">Search</button></td>
                 </tr>
             </tbody>
         </table>
@@ -63,11 +63,17 @@ $canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "
                     <td><?=$project["required_software"]?></td>
                     <td><?=$project["required_hardware"]?></td>
                     <td><?=$project["members"]?></td>
-                    <?php if ($isAdmin): ?>
-                    <th></th>
+                    <?php if ($isAdmin && $project["state"] == "waiting"): ?>
+                        <td>
+                            <form action="editProject.php" method="post">
+                                <input type="text" name="project_id" style="display: none;" value="<?=$project["id"]?>">
+                                <input class="btn" type="submit" name="acceptBtn" value="✅"></input>
+                                <input class="btn" type="submit" name="rejectBtn" value="❌"></input>
+                            </form>
+                        </td>
                     <?php endif;?>
                     <?php if ($canEdit): ?>
-                    <th><a href="editProject.php?project_id=<?=$project["id"]?>">Edit</a> | <a href="deleteProject.php?project_id=<?=$project["id"]?>">Delete</a></th>
+                    <td><a href="editProject.php?project_id=<?=$project["id"]?>">Edit</a> | <a href="deleteProject.php?project_id=<?=$project["id"]?>">Delete</a></td>
                     <?php endif;?>
                 </tr>
             <?php endforeach;?>
@@ -76,5 +82,5 @@ $canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "
         <?php else: ?>
         <h1>No Projects Added Yet!</h1>
         <?php endif;?>
-    <?php endif;?>
-    <script src="assets/js/index.js"></script>
+<?php endif;?>
+<script src="assets/js/index.js"></script>

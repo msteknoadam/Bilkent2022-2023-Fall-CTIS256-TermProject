@@ -18,9 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);
 
-    if (!isset($project_id)) {
-        return;
-    }
+    if (isset($project_id)) {
+        if (isset($acceptBtn)) {
+            $newState = "accepted";
+        } else if (isset($rejectBtn)) {
+            $newState = "rejected";
+        }
 
-    // if(isset())
+        if (isset($newState)) {
+            $stmt = $db->prepare("update projects set state=? where id=?");
+            $stmt->execute([$newState, $project_id]);
+        }
+    }
 }
+
+header("Location: " . $_SERVER['HTTP_REFERER']);
