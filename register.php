@@ -1,6 +1,5 @@
 <?php include "db.php"; //require;
 extract($_POST);
-var_dump($_POST);
 $errors = array();
 if (isset($submit)) {
     if (!isset($email) || strlen(trim($email)) == 0) {
