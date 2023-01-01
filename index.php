@@ -10,7 +10,7 @@ if (isset($_POST["logout"])) {
 }
 
 if (!isset($user)) {
-    $projects_stmt = $db->prepare("select * from projects order by year desc");
+    $projects_stmt = $db->prepare("select * from projects order by year desc, semester desc");
     $projects_stmt->execute();
     $projects = $projects_stmt->fetchAll();
 }
