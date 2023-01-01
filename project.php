@@ -1,4 +1,11 @@
-<?php include "db.php"; //require;
+<?php 
+include_once "db.php";
+include_once "session.php"; 
+
+if(!isset($user)){
+    header("Location: login.php");
+}
+//require;
 extract($_POST);
 $errors = array();
 if (isset($submit)) {
