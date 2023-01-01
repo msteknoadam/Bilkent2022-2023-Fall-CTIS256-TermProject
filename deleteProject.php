@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     extract($_GET);
 
     if (isset($project_id)) {
-        $stmt = $db->prepare("delete from projects where id=?");
-        $stmt->execute([$project_id]);
+        $stmt = $db->prepare("delete from projects where id=? and owner_uid=?");
+        $stmt->execute([$project_id, $user["id"]]);
     }
 }
 

@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 include_once "db.php";
+include_once "session.php";
 extract($_POST);
 
 $params = array();
@@ -32,14 +33,17 @@ if (isset($group_member_name) && strlen(trim($group_member_name)) != 0) {
     $params[] = strtolower("%" . $group_member_name . "%");
 }
 
+if (isset($user)) {
+    $sql = $sql . (sizeof($params) > 0 ? " and" : "") . " owner_uid=?";
+    $params[] = $user["id"];
+}
+
 if (sizeof($params) == 0) {
     $sql = $sql . " 1"; // if no filters provided, select all rows
 }
 
 $sql = $sql . " order by year desc, semester desc";
 
-// var_dump($sql);
-// var_dump($params);
 $stmt = $db->prepare($sql);
 $stmt->execute($params);
 $projects = $stmt->fetchAll();

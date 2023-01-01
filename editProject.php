@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 
-    $project_stmt = $db->prepare("select * from projects where id=?");
-    $project_stmt->execute([$project_id]);
+    $project_stmt = $db->prepare("select * from projects where id=? and owner_uid=?");
+    $project_stmt->execute([$project_id, $user["id"]]);
     $project = $project_stmt->fetch();
 
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,13 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         }
 
         if (isset($newState)) {
-            $stmt = $db->prepare("update projects set state=? where id=?");
-            $stmt->execute([$newState, $project_id]);
+            $stmt = $db->prepare("update projects set state=? where id=? and owner_uid=?");
+            $stmt->execute([$newState, $project_id, $user["id"]]);
         }
 
         if (isset($update)) {
-            $stmt = $db->prepare("update projects set name=?,description=?,year=?,semester=?,requirements=?,required_software=?,required_hardware=?,members=? where id=?");
-            $result = $stmt->execute([$name, $description, $year, $semester, $requirements, $required_software, $required_hardware, $members, $project_id]);
+            $stmt = $db->prepare("update projects set name=?,description=?,year=?,semester=?,requirements=?,required_software=?,required_hardware=?,members=? where id=? and owner_uid=?");
+            $result = $stmt->execute([$name, $description, $year, $semester, $requirements, $required_software, $required_hardware, $members, $project_id, $user["id"]]);
         }
     }
 

@@ -9,12 +9,6 @@ if (isset($_POST["logout"])) {
     setcookie(session_name(), "", 1, "/");
 }
 
-// if (!isset($user)) {
-//     $projects_stmt = $db->prepare("select * from projects order by year desc, semester desc");
-//     $projects_stmt->execute();
-//     $projects = $projects_stmt->fetchAll();
-// }
-
 ?>
 
 <!DOCTYPE html>

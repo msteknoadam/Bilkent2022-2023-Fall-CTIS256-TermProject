@@ -2,8 +2,18 @@
 include_once "db.php";
 include_once "session.php";
 
-$projects_stmt = $db->prepare("select * from projects order by year desc, semester desc");
-$projects_stmt->execute();
+$sql = "select * from projects";
+$params = array();
+
+if (isset($user)) {
+    $sql = $sql . " where owner_uid=?";
+    $params[] = $user["id"];
+}
+
+$sql = $sql . " order by year desc, semester desc";
+
+$projects_stmt = $db->prepare($sql);
+$projects_stmt->execute($params);
 $projects = $projects_stmt->fetchAll();
 
 $isAdmin = isset($user) && $user["userclass"] === "admin";

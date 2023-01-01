@@ -34,8 +34,8 @@ if (isset($submit)) {
     if (sizeof($errors) == 0) {
         $currYear = (int) date("Y/m/d");
         $year = $currYear . "-" . ($currYear + 1);
-        $stmt = $db->prepare("INSERT INTO projects (name,description,year,semester,requirements,state,required_software,required_hardware,members) values (?,?,?,?,?,?,?,?,?)");
-        $stmt->execute([$projectname, $projectdescription, $year, $semester, $requirement, "waiting", $software, $hardware, $members]);
+        $stmt = $db->prepare("INSERT INTO projects (name,description,year,semester,requirements,state,required_software,required_hardware,members,owner_uid) values (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([$projectname, $projectdescription, $year, $semester, $requirement, "waiting", $software, $hardware, $members, $user["id"]]);
         header("Location: index.php");
 
     }
