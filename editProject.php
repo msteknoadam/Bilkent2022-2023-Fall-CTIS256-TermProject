@@ -39,9 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $stmt = $db->prepare("update projects set state=? where id=?");
                 $stmt->execute([$newState, $project_id]);
             }
-        }
-
-        if (isset($update)) {
+        } else if (isset($update)) {
             $stmt = $db->prepare("update projects set name=?,description=?,year=?,semester=?,requirements=?,required_software=?,required_hardware=?,members=? where id=? and owner_uid=?");
             $result = $stmt->execute([$name, $description, $year, $semester, $requirements, $required_software, $required_hardware, $members, $project_id, $user["id"]]);
         }
