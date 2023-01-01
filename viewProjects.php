@@ -6,6 +6,9 @@ $projects_stmt = $db->prepare("select * from projects order by year desc, semest
 $projects_stmt->execute();
 $projects = $projects_stmt->fetchAll();
 
+$isAdmin = isset($user) && $user["userclass"] === "admin";
+$canEdit = isset($user) && in_array($user["userclass"], ["firm", "instructor", "student"]);
+
 ?>
 
 <?php if (isset($projects)): ?>
@@ -41,6 +44,12 @@ $projects = $projects_stmt->fetchAll();
                 <th>Required Softwares</th>
                 <th>Required Hardware</th>
                 <th>Group Members</th>
+                <?php if ($isAdmin): ?>
+                <th>Accept/Reject</th>
+                <?php endif;?>
+                <?php if ($canEdit): ?>
+                <th>Edit/Delete</th>
+                <?php endif;?>
             </thead>
             <tbody id="projects">
             <?php foreach ($projects as $project): ?>
@@ -54,6 +63,12 @@ $projects = $projects_stmt->fetchAll();
                     <td><?=$project["required_software"]?></td>
                     <td><?=$project["required_hardware"]?></td>
                     <td><?=$project["members"]?></td>
+                    <?php if ($isAdmin): ?>
+                    <th></th>
+                    <?php endif;?>
+                    <?php if ($canEdit): ?>
+                    <th><a href="editProject.php?project_id=<?=$project["id"]?>">Edit</a> | <a href="deleteProject.php?project_id=<?=$project["id"]?>">Delete</a></th>
+                    <?php endif;?>
                 </tr>
             <?php endforeach;?>
             </tbody>
