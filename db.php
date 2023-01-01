@@ -1,18 +1,18 @@
 <?php
 
 $dsn = "mysql:host=localhost;port=3306;dbname=ctis256;charset=utf8mb4";
-$user = "std";
-$pass = "";
+$mysql_user = "std";
+$mysql_pass = "";
 
 try {
-  $db = new PDO($dsn, $user, $pass);
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db = new PDO($dsn, $mysql_user, $mysql_pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $ex) {
-  gotoErrorPage();
+    gotoErrorPage();
 }
 
 function gotoErrorPage()
 {
-  header("Location: error.php");
-  exit;
+    header("Location: error.php");
+    exit;
 }
