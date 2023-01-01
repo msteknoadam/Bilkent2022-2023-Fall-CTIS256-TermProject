@@ -32,7 +32,15 @@ $(function () {
                                 <td>${p.year}</td>
                                 <td>${p.semester}</td>
                                 <td>${p.requirements}</td>
-                                <td>${p.state}</td>
+                                <td title="${p.state}">${
+								p.state === "accepted"
+									? "✅"
+									: p.state === "waiting"
+									? "⏳"
+									: p.state === "rejected"
+									? "❌"
+									: "❔"
+							}</td>
                                 <td>${p.required_software}</td>
                                 <td>${p.required_hardware}</td>
                                 <td>${p.members}</td>
