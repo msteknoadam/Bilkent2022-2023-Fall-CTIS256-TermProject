@@ -85,7 +85,7 @@ if (isset($user)) {
                     <td><?=$project["year"]?></td>
                     <td><?=$project["semester"]?></td>
                     <td><?=$project["requirements"]?></td>
-                    <td><?=$project["state"]?></td>
+                    <td title="<?=$project["state"]?>"><?=$project["state"] === "accepted" ? "✅" : ($project["state"] === "waiting" ? "⏳" : ($project["state"] === "rejected" ? "❌" : "❔"))?></td>
                     <td><?=$project["required_software"]?></td>
                     <td><?=$project["required_hardware"]?></td>
                     <td><?=$project["members"]?></td>
