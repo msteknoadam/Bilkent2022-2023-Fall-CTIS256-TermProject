@@ -27,8 +27,6 @@ if (isset($_POST["logout"])) {
     <title>Home Page</title>
 </head>
 <body>
-    <h1><a href="login.php">Login</a></h1>
-    <h1><a href="register.php">Register</a></h1>
 
     <?php if (isset($user)): ?>
     <h1><a href="profile.php">Profile</a></h1>
@@ -37,6 +35,9 @@ if (isset($_POST["logout"])) {
     <form action="" method="post">
         <input type="submit" value="Logout" name="logout">
     </form>
+    <?php else: ?>
+    <h1><a href="login.php">Login</a></h1>
+    <h1><a href="register.php">Register</a></h1>
     <?php endif;?>
 
     <?php
