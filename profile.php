@@ -32,6 +32,7 @@ if (isset($_POST["update"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <?php include_once "header.php"?>
 </head>
 <body>
     <h1>Profile Details</h1>
@@ -71,7 +72,8 @@ if (isset($_POST["update"])) {
                 </tr>
             </tbody>
         </table>
-        <input type="submit" name="update" value="Update Profile Data">
+        <br>
+        <center><input class="btn" type="submit" name="update" value="Update Profile Data"></center>
     </form>
 </body>
 </html>
