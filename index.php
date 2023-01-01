@@ -31,6 +31,7 @@ if (!isset($user)) {
 
     <?php if (isset($user)): ?>
     <h1><a href="profile.php">Profile</a></h1>
+    <h1><a href="project.php">Project</a></h1>
     <form action="" method="post">
         <input type="submit" value="Logout" name="logout">
     </form>
