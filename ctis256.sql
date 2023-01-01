@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jan 01, 2023 at 11:41 AM
+-- Generation Time: Jan 01, 2023 at 11:52 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -37,6 +37,12 @@ CREATE TABLE `projects` (
     `required_software` text NOT NULL,
     `required_hardware` text NOT NULL,
     `members` text NOT NULL) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+--
+-- Dumping data for table `projects`
+--
+INSERT INTO `projects` (`id`, `name`, `description`, `year`, `semester`, `requirements`, `state`, `required_software`, `required_hardware`, `members`)
+    VALUES (1, 'CTIS256 Term Project', 'Term Project of Backend Development Course', '2022-2023', 'Fall', 'Make different userclasses\r\nGive each different permission', 'waiting', 'PHP\r\nMySQL\r\nApache', 'Computer\r\nInternet (actually not a hardware)', 'Ayse\r\nGoktug'), (2, 'CTIS257 Term Project', 'Term Project of CTIS257', '2022-2023', 'Spring', 'Page should load \"fast\" hehe\r\n99.999% Uptime', 'rejected', 'NodeJS\r\nNginx\r\nPostgreSQL', 'Computer\r\nInternet', 'Ayse\r\nGoktug'), (3, 'CTIS255 Term Project', 'Term Project of CTIS255 Lecture', '2021-2022', 'Spring', 'At least 5 different pages\r\nOne of the pages have to include game', 'accepted', 'HTML\r\nCSS\r\nJS\r\njQuery', 'Computer\r\nInternet', 'Ayse\r\nGoktug');
 
 -- --------------------------------------------------------
 --
@@ -83,7 +89,7 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `projects`
 --
-ALTER TABLE `projects` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `projects` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 4;
 
 --
 -- AUTO_INCREMENT for table `users`
