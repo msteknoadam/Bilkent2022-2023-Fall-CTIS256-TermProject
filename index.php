@@ -24,6 +24,7 @@ if (isset($_POST["logout"])) {
     <h1><a href="register.php">Register</a></h1>
 
    <?php if (isset($user)): ?>
+    <h1><a href="profile.php">Profile</a></h1>
     <form action="" method="post">
         <input type="submit" value="Logout" name="logout">
     </form>
