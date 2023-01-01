@@ -29,7 +29,7 @@ if (isset($submit)) {
         $year = $currYear . "-" . ($currYear + 1);
         $stmt = $db->prepare("INSERT INTO projects (name,description,year,semester,requirements,state,required_software,required_hardware,members) values (?,?,?,?,?,?,?,?,?)");
         $stmt->execute([$projectname, $projectdescription, $year, $semester, $requirement, "waiting", $software, $hardware, $members]);
-        //header("Location: index.php");
+        header("Location: index.php");
            
     }
     
