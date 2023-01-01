@@ -1,8 +1,8 @@
-<?php 
+<?php
 include_once "db.php";
-include_once "session.php"; 
+include_once "session.php";
 
-if(!isset($user)){
+if (!isset($user)) {
     header("Location: login.php");
 }
 //require;
@@ -37,9 +37,9 @@ if (isset($submit)) {
         $stmt = $db->prepare("INSERT INTO projects (name,description,year,semester,requirements,state,required_software,required_hardware,members) values (?,?,?,?,?,?,?,?,?)");
         $stmt->execute([$projectname, $projectdescription, $year, $semester, $requirement, "waiting", $software, $hardware, $members]);
         header("Location: index.php");
-           
+
     }
-    
+
 }
 ?>
 
@@ -50,7 +50,7 @@ if (isset($submit)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include "header.php"; ?>
+    <?php include "header.php";?>
     <style>
         .inp {
             display: block;
@@ -60,7 +60,7 @@ if (isset($submit)) {
 <body>
     <h1>Welcome to Project Page</h1>
     <h3>Please Write Your Project Details</h3>
-<div class="row">
+    <div class="row">
         <div class="col s12 m6">
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
@@ -81,11 +81,11 @@ if (isset($submit)) {
                         <input type="text" name="members" placeholder="Enter your project members" value="<?=$members ?? ""?>">
                         <br>
                         <br>
-                        <center>    
+                        <center>
                             <!-- SUBMIT BUTTON -->
-                        <input class="inp btn" type="submit" name="submit">
-                    </center>
-                        
+                            <input class="inp btn" type="submit" name="submit">
+                        </center>
+
                     </form>
                 </div>
             </div>
