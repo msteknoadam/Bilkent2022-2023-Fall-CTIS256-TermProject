@@ -2,11 +2,9 @@
 include_once "db.php";
 include_once "session.php";
 
-if (!isset($user)) {
-    $projects_stmt = $db->prepare("select * from projects order by year desc, semester desc");
-    $projects_stmt->execute();
-    $projects = $projects_stmt->fetchAll();
-}
+$projects_stmt = $db->prepare("select * from projects order by year desc, semester desc");
+$projects_stmt->execute();
+$projects = $projects_stmt->fetchAll();
 
 ?>
 
