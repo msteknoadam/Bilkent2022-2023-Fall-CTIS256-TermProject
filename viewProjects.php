@@ -5,7 +5,7 @@ include_once "session.php";
 $sql = "select * from projects";
 $params = array();
 
-if (isset($user)) {
+if (isset($user) && $user["userclass"] != "admin") {
     $sql = $sql . " where owner_uid=?";
     $params[] = $user["id"];
 }

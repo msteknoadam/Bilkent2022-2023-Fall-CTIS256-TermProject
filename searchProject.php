@@ -33,7 +33,7 @@ if (isset($group_member_name) && strlen(trim($group_member_name)) != 0) {
     $params[] = strtolower("%" . $group_member_name . "%");
 }
 
-if (isset($user)) {
+if (isset($user) && $user["userclass"] != "admin") {
     $sql = $sql . (sizeof($params) > 0 ? " and" : "") . " owner_uid=?";
     $params[] = $user["id"];
 }

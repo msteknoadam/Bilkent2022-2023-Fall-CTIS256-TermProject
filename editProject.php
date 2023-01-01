@@ -28,15 +28,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     if (isset($project_id)) {
-        if (isset($acceptBtn)) {
-            $newState = "accepted";
-        } else if (isset($rejectBtn)) {
-            $newState = "rejected";
-        }
+        if ($user["userclass"] == "admin") {
+            if (isset($acceptBtn)) {
+                $newState = "accepted";
+            } else if (isset($rejectBtn)) {
+                $newState = "rejected";
+            }
 
-        if (isset($newState)) {
-            $stmt = $db->prepare("update projects set state=? where id=? and owner_uid=?");
-            $stmt->execute([$newState, $project_id, $user["id"]]);
+            if (isset($newState)) {
+                $stmt = $db->prepare("update projects set state=? where id=?");
+                $stmt->execute([$newState, $project_id]);
+            }
         }
 
         if (isset($update)) {
