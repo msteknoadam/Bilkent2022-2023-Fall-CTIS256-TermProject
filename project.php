@@ -43,9 +43,9 @@ if (isset($submit)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php include "header.php"; ?>
     <style>
         .inp {
-            
             display: block;
         }
     </style>
@@ -74,8 +74,11 @@ if (isset($submit)) {
                         <input type="text" name="members" placeholder="Enter your project members" value="<?=$members ?? ""?>">
                         <br>
                         <br>
+                        <center>    
                             <!-- SUBMIT BUTTON -->
-                        <input class="inp" type="submit" name="submit">
+                        <input class="inp btn" type="submit" name="submit">
+                    </center>
+                        
                     </form>
                 </div>
             </div>
