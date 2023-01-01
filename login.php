@@ -56,7 +56,7 @@ if (isset($submit)) {
                         <input type="email" name="email" placeholder="Enter your email">
                         <p>Password: <?=$password_error ? "Please enter your password !!" : ""?> </p>
                         <input type="password" name="password">
-                        <input class="inp" type="submit" name="submit">
+                        <input class="inp btn" type="submit" name="submit">
                     </form>
                 </div>
             </div>
