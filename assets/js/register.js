@@ -1,5 +1,5 @@
 function adjustInputs() {
-	if ($("#firmOption").isSelected()) {
+	if ($("#firmOption:selected").length != 0) {
 		$("#firmInputs").show();
 		$("#nameInput").hide();
 	} else {

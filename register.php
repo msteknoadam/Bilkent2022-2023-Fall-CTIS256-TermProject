@@ -1,67 +1,58 @@
 <?php include "db.php"; //require;
 extract($_POST);
-$email_error = false;
-$username_error = false;
-$password_error = false;
-$userclass_error = false;
-$firmname_error = false;
-$city_error = false;
-$district_error = false;
-$address_error = false;
-$name_error = false;
-$email_taken = false;
-$username_taken = false;
+var_dump($_POST);
+$errors = array();
 if (isset($submit)) {
     if (!isset($email) || strlen(trim($email)) == 0) {
-        $email_error = true;
+        $errors[] = "email_error";
     }
     if (!isset($username) || strlen(trim($username)) == 0) {
-        $username_error = true;
+        $errors[] = "username_error";
     }
     if (!isset($password) || strlen(trim($password)) == 0) {
-        $password_error = true;
+        $errors[] = "password_error";
     }
-    if (!isset($userclass) || in_array($userclass, array("firm", "instructor", "student"))) {
-        $userclass_error = true;
+    if (!isset($userclass) || !in_array($userclass, array("firm", "instructor", "student"))) {
+        $errors[] = "userclass_error";
     }
 
     if ($userclass == "firm") {
         if (!isset($firmname) || strlen(trim($firmname)) == 0) {
-            $firmname_error = true;
+            $errors[] = "firmname_error";
         }
         if (!isset($city) || strlen(trim($city)) == 0) {
-            $city_error = true;
+            $errors[] = "city_error";
         }
         if (!isset($district) || strlen(trim($district)) == 0) {
-            $district_error = true;
+            $errors[] = "district_error";
         }
         if (!isset($address) || strlen(trim($address)) == 0) {
-            $address_error = true;
+            $errors[] = "address_error";
         }
     } else {
         if (!isset($name) || strlen(trim($name)) == 0) {
-            $name_error = true;
+            $errors[] = "name_error";
         }
     }
 
-    if ($email_error == false && $username_error == false && $password_error == false) {
+    if (sizeof($errors) == 0) {
         $email_stmt = $db->prepare("select * from users where email = ?");
         $email_stmt->execute([$email]);
         $email_user = $email_stmt->fetch();
         if ($email_user != false) {
-            $email_taken = true;
+            $errors[] = "email_taken";
         }
 
         $username_stmt = $db->prepare("select * from users where username = ?");
         $username_stmt->execute([$username]);
         $username_user = $username_stmt->fetch();
         if ($username_user != false) {
-            $username_taken = true;
+            $errors[] = "username_taken";
         }
 
         if ($email_taken == false && $username_taken == false) {
-            $stmt = $db->prepare("INSERT INTO users (email,username,password,userclass) values (?,?,?,?)");
-            $stmt->execute([$email, $username, $password, $userclass]);
+            $stmt = $db->prepare("INSERT INTO users (email,username,password,userclass,firmname,city,district,address,name) values (?,?,?,?,?,?,?,?,?)");
+            $stmt->execute([$email, $username, $password, $userclass, $firmname, $city, $district, $address, $name]);
             $userid = (int) $db->lastInsertId();
             session_start();
             $_SESSION["user"] = ["id" => $userid];
@@ -98,33 +89,33 @@ if (isset($submit)) {
         <div class="col s12 m6">
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
-                    <?=$email_taken == true ? "<h2 style='color:red'>This e-mail is already taken.</h2>" : ""?>
-                    <?=$username_taken == true ? "<h2 style='color:red'>This username is already taken.</h2>" : ""?>
+                    <?=in_array("email_taken", $errors) ? "<h2 style='color:red'>This e-mail is already taken.</h2>" : ""?>
+                    <?=in_array("username_taken", $errors) ? "<h2 style='color:red'>This username is already taken.</h2>" : ""?>
                     <form action="" method="post">
-                        <p>Email: <?=$email_error ? "Please enter your email !!" : ""?></p>
+                        <p>Email: <?=in_array("email_error", $errors) ? "Please enter your email !!" : ""?></p>
                         <input type="email" name="email" placeholder="Enter your email">
-                        <p>Username: <?=$username_error ? "Please enter your username !!" : ""?></p>
+                        <p>Username: <?=in_array("username_error", $errors) ? "Please enter your username !!" : ""?></p>
                         <input type="text" name="username" placeholder="Enter your username">
-                        <p>Password: <?=$password_error ? "Please enter your password !!" : ""?> </p>
+                        <p>Password: <?=in_array("password_error", $errors) ? "Please enter your password !!" : ""?> </p>
                         <input type="password" name="password">
-                        <p>Account Type: <?=$userclass_error ? "Please select your account type !!" : ""?></p>
+                        <p>Account Type: <?=in_array("userclass_error", $errors) ? "Please select your account type !!" : ""?></p>
                         <select name="userclass" id="typeSelector">
                             <option value="firm" id="firmOption">Firm User</option>
                             <option value="instructor">Instructor User/Project Advisor User</option>
                             <option value="student">Student User</option>
                         </select>
                         <div id="firmInputs">
-                            <p>Firm Name: <?=$firmname_error ? "Please enter your firm's name !!" : ""?> </p>
+                            <p>Firm Name: <?=in_array("firmname_error", $errors) ? "Please enter your firm's name !!" : ""?> </p>
                             <input type="text" name="firmname">
-                            <p>City: <?=$city_error ? "Please enter your firm's city !!" : ""?> </p>
+                            <p>City: <?=in_array("city_error", $errors) ? "Please enter your firm's city !!" : ""?> </p>
                             <input type="text" name="city">
-                            <p>District: <?=$district_error ? "Please enter your firm's district !!" : ""?> </p>
+                            <p>District: <?=in_array("district_error", $errors) ? "Please enter your firm's district !!" : ""?> </p>
                             <input type="text" name="district">
-                            <p>Address: <?=$address_error ? "Please enter your firm's address !!" : ""?> </p>
+                            <p>Address: <?=in_array("address_error", $errors) ? "Please enter your firm's address !!" : ""?> </p>
                             <input type="text" name="address">
                         </div>
                         <div id="nameInput">
-                            <p>Name: <?=$name_error ? "Please enter your name !!" : ""?> </p>
+                            <p>Name: <?=in_array("name_error", $errors) ? "Please enter your name !!" : ""?> </p>
                             <input type="text" name="name">
                         </div>
                         <input class="inp" type="submit" name="submit">
